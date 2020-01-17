@@ -52,11 +52,12 @@ body {
       margin: 0; }
     body main header p {
       margin-top: 10px; }
+  body main label {
+    letter-spacing: 1px; }
   body main label,
   body main select {
     font-weight: 500;
     font-family: "Roboto", sans-serif;
-    letter-spacing: 1px;
     font-size: 18px;
     display: block; }
   body main form {
@@ -114,6 +115,19 @@ body {
              break-inside: avoid; }
         body main #images .images__container .image__wrapper .image {
           width: calc(70vw / 2 - 3px); } }
+  @media (max-width: 500px) {
+    body main #images .images__container {
+      width: 70vw;
+      margin: 20px auto;
+      -moz-columns: 1 !important;
+           columns: 1 !important; }
+      body main #images .images__container .image__wrapper {
+        width: 100%;
+        padding: 4px;
+        -moz-column-break-inside: avoid;
+             break-inside: avoid; }
+        body main #images .images__container .image__wrapper .image {
+          width: 70vw; } }
 
 body {
   text-align: center; }
