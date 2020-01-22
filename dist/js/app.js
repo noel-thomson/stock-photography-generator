@@ -3,33 +3,61 @@
 var app = {
   apiUrl: "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"
 };
+$.ajaxSetup({
+  beforeSend: function beforeSend(xhr) {
+    xhr.setRequestHeader("authorization", "563492ad6f91700001000001a105c9a834ff4589957585a65784a766");
+  }
+});
+
+app.getPhotos = function (query) {
+  $.getJSON("https://api.pexels.com/v1/search?", {
+    query: query
+  }).then(function (res) {
+    console.log(res.photos);
+    $(".images__container").remove();
+    app.displayPhotos(res.photos);
+  });
+};
 
 app.displayPhotos = function (array) {
   var container = "<div class=\"images__container\"></div>";
   $("#images").append(container); // appends container *into* DOM element
 
   var imageWrapper = array.map(function (i) {
-    var image = "<div class=\"image__wrapper\">\n\t\t\t\t        <img class=\"image\" src=\"".concat(i.media.m, "\" alt=\"\">\n                    </div>");
+    var image = "<div class=\"image__wrapper\">\n\t\t\t\t        <img class=\"image\" src=\"".concat(i.src.large, "\" alt=\"\">\n                    </div>");
     return image;
   }).join("");
   $(".images__container").append(imageWrapper);
-};
+}; // app.displayPhotos = array => {
+//   const container = `<div class="images__container"></div>`;
+//   $("#images").append(container); // appends container *into* DOM element
+//   const imageWrapper = array
+//     .map(i => {
+//       let image = `<div class="image__wrapper">
+// 				        <img class="image" src="${i.media.m}" alt="">
+//                     </div>`;
+//       return image;
+//     })
+//     .join("");
+//   $(".images__container").append(imageWrapper);
+// };
+// app.getPhotos = query => {
+//   $.getJSON(app.apiUrl, {
+//     apiKey: "379cfdca1307ffffd901dcad5c53aeac",
+//     tags: query,
+//     ids:
+//       ",78918407@N08, ,78621811@N06, ,91805169@N04, ,156824961@N07, ,63848257@N06, ,96403371@N04,",
+//     tagmode: "any",
+//     format: "json",
+//     safe_search: 1,
+//     content_type: 1
+//   }).then(data => {
+//     $(".images__container").remove();
+//     console.log(data.items);
+//     app.displayPhotos(data.items);
+//   });
+// };
 
-app.getPhotos = function (query) {
-  $.getJSON(app.apiUrl, {
-    apiKey: "379cfdca1307ffffd901dcad5c53aeac",
-    tags: query,
-    ids: ",78918407@N08, ,78621811@N06, ,91805169@N04, ,156824961@N07, ,63848257@N06, ,96403371@N04,",
-    tagmode: "any",
-    format: "json",
-    safe_search: 1,
-    content_type: 1
-  }).then(function (data) {
-    $(".images__container").remove();
-    console.log(data.items);
-    app.displayPhotos(data.items);
-  });
-};
 
 app.eventListener = function () {
   $("#selection").on("change", function () {
