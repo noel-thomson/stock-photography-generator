@@ -58,9 +58,18 @@ body {
       body header form input {
         border: none;
         width: 300px;
-        text-align: center;
         border-radius: 24px;
-        padding: 5px; }
+        padding: 5px 16px; }
+      body header form input[type="text"]::-webkit-input-placeholder {
+        text-align: center; }
+      body header form input[type="text"]::-moz-placeholder {
+        text-align: center; }
+      body header form input[type="text"]:-ms-input-placeholder {
+        text-align: center; }
+      body header form input[type="text"]::-ms-input-placeholder {
+        text-align: center; }
+      body header form input[type="text"]::placeholder {
+        text-align: center; }
       body header form input:focus {
         outline: none; }
     body header p {
@@ -136,7 +145,7 @@ body {
             width: calc(100vw); } }
   body footer {
     height: 60px;
-    background: #2c3e50;
+    background: #282828;
     display: flex;
     flex-direction: column;
     align-items: center;
