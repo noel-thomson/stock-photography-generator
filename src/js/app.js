@@ -1,7 +1,19 @@
-const app = {
-  apiUrl:
-    "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"
-};
+let defaultQuery = "architecture";
+
+$(() => {
+  $("#searchForm").on("submit", function(e) {
+    let choice = $("#searchText").val();
+    getPhotos(choice);
+    e.preventDefault();
+  });
+});
+
+$(() => {
+  $(".examples").click(function() {
+    let choice = $(this).html();
+    getPhotos(choice);
+  });
+});
 
 $.ajaxSetup({
   beforeSend: function(xhr) {
@@ -12,19 +24,19 @@ $.ajaxSetup({
   }
 });
 
-app.getPhotos = query => {
+const getPhotos = query => {
   $.getJSON("https://api.pexels.com/v1/search?", {
     query: query
   }).then(function(res) {
     console.log(res.photos);
-    $(".images__container").remove();
-    app.displayPhotos(res.photos);
+    $(".images__container").remove(); // remove previous photo container
+    displayPhotos(res.photos);
   });
 };
 
-app.displayPhotos = array => {
+const displayPhotos = array => {
   const container = `<div class="images__container"></div>`;
-  $("#images").append(container); // appends container *into* DOM element
+  $("#images").append(container); // appends container into DOM element
   const imageWrapper = array
     .map(i => {
       let image = `<div class="image__wrapper">
@@ -36,20 +48,32 @@ app.displayPhotos = array => {
   $(".images__container").append(imageWrapper);
 };
 
-// app.displayPhotos = array => {
-//   const container = `<div class="images__container"></div>`;
-//   $("#images").append(container); // appends container *into* DOM element
-//   const imageWrapper = array
-//     .map(i => {
-//       let image = `<div class="image__wrapper">
-// 				        <img class="image" src="${i.media.m}" alt="">
-//                     </div>`;
-//       return image;
-//     })
-//     .join("");
-//   $(".images__container").append(imageWrapper);
+getPhotos(defaultQuery);
+
+// v1: flickr
+
+// const app = {
+//   apiUrl:
+//     "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"
 // };
 
+// app.eventListener = () => {
+//   $("#selection").on("change", function() {
+//     const choice = $(this).val();
+//     app.getPhotos(choice);
+//   });
+// };
+
+// app.init = () => {
+//   app.eventListener();
+//   app.getPhotos("architecture");
+// };
+
+// $(() => {
+//   app.init();
+// });
+
+// flickr api
 // app.getPhotos = query => {
 //   $.getJSON(app.apiUrl, {
 //     apiKey: "379cfdca1307ffffd901dcad5c53aeac",
@@ -66,19 +90,3 @@ app.displayPhotos = array => {
 //     app.displayPhotos(data.items);
 //   });
 // };
-
-app.eventListener = () => {
-  $("#selection").on("change", function() {
-    const choice = $(this).val();
-    app.getPhotos(choice);
-  });
-};
-
-app.init = () => {
-  app.eventListener();
-  app.getPhotos("architecture");
-};
-
-$(() => {
-  app.init();
-});

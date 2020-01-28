@@ -1,46 +1,66 @@
 "use strict";
 
-var app = {
-  apiUrl: "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"
-};
+var defaultQuery = "architecture";
+$(function () {
+  $("#searchForm").on("submit", function (e) {
+    var choice = $("#searchText").val();
+    getPhotos(choice);
+    e.preventDefault();
+  });
+});
+$(function () {
+  $(".examples").click(function () {
+    var choice = $(this).html();
+    getPhotos(choice);
+  });
+});
 $.ajaxSetup({
   beforeSend: function beforeSend(xhr) {
     xhr.setRequestHeader("authorization", "563492ad6f91700001000001a105c9a834ff4589957585a65784a766");
   }
 });
 
-app.getPhotos = function (query) {
+var getPhotos = function getPhotos(query) {
   $.getJSON("https://api.pexels.com/v1/search?", {
     query: query
   }).then(function (res) {
     console.log(res.photos);
-    $(".images__container").remove();
-    app.displayPhotos(res.photos);
+    $(".images__container").remove(); // remove previous photo container
+
+    displayPhotos(res.photos);
   });
 };
 
-app.displayPhotos = function (array) {
+var displayPhotos = function displayPhotos(array) {
   var container = "<div class=\"images__container\"></div>";
-  $("#images").append(container); // appends container *into* DOM element
+  $("#images").append(container); // appends container into DOM element
 
   var imageWrapper = array.map(function (i) {
     var image = "<div class=\"image__wrapper\">\n\t\t\t\t        <img class=\"image\" src=\"".concat(i.src.large, "\" alt=\"\">\n                    </div>");
     return image;
   }).join("");
   $(".images__container").append(imageWrapper);
-}; // app.displayPhotos = array => {
-//   const container = `<div class="images__container"></div>`;
-//   $("#images").append(container); // appends container *into* DOM element
-//   const imageWrapper = array
-//     .map(i => {
-//       let image = `<div class="image__wrapper">
-// 				        <img class="image" src="${i.media.m}" alt="">
-//                     </div>`;
-//       return image;
-//     })
-//     .join("");
-//   $(".images__container").append(imageWrapper);
+};
+
+getPhotos(defaultQuery); // v1: flickr
+// const app = {
+//   apiUrl:
+//     "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"
 // };
+// app.eventListener = () => {
+//   $("#selection").on("change", function() {
+//     const choice = $(this).val();
+//     app.getPhotos(choice);
+//   });
+// };
+// app.init = () => {
+//   app.eventListener();
+//   app.getPhotos("architecture");
+// };
+// $(() => {
+//   app.init();
+// });
+// flickr api
 // app.getPhotos = query => {
 //   $.getJSON(app.apiUrl, {
 //     apiKey: "379cfdca1307ffffd901dcad5c53aeac",
@@ -57,20 +77,3 @@ app.displayPhotos = function (array) {
 //     app.displayPhotos(data.items);
 //   });
 // };
-
-
-app.eventListener = function () {
-  $("#selection").on("change", function () {
-    var choice = $(this).val();
-    app.getPhotos(choice);
-  });
-};
-
-app.init = function () {
-  app.eventListener();
-  app.getPhotos("architecture");
-};
-
-$(function () {
-  app.init();
-});

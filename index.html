@@ -42,24 +42,18 @@
   <body>
     <header>
       <h1>Stock Photography Generator</h1>
+      <form action="" id="searchForm">
+        <input type="text" id="searchText" placeholder="Search For Images" />
+      </form>
+      <p>
+        <span>Suggested: </span>
+        <span class="examples">landscape</span>,
+        <span class="examples">ocean</span>,
+        <span class="examples">black and white</span>
+      </p>
     </header>
     <main>
-      <form action="">
-        <label for="selection">Choose a Subject</label>
-        <select name="selection" id="selection">
-          <option value="architecture">Architecture</option>
-          <option value="black and white">Black and White</option>
-          <option value="landscape">Landscapes</option>
-          <option value="ocean">Ocean</option>
-        </select>
-      </form>
-      <div id="images">
-        <!-- <div class="images__container">
-          <div class="image__wrapper">
-            <img class="image" src="" alt="">
-          </div>
-        </div> -->
-      </div>
+      <div id="images"></div>
     </main>
 
     <!-- jQuery CDN -->

@@ -52,8 +52,29 @@ body {
       font-weight: 700;
       letter-spacing: 1px;
       margin: 0; }
+    body header form {
+      margin-top: 40px;
+      margin-bottom: 10px; }
+      body header form input {
+        border: none;
+        width: 300px;
+        text-align: center;
+        border-radius: 24px;
+        padding: 5px; }
+      body header form input:focus {
+        outline: none; }
     body header p {
-      margin-top: 10px; }
+      font-weight: 400;
+      font-size: 14px;
+      color: #dddddf; }
+      body header p span:nth-of-type(1) {
+        color: white; }
+      @media (max-width: 500px) {
+        body header p span:nth-of-type(1) {
+          display: none; } }
+      body header p .examples:hover {
+        cursor: pointer;
+        color: white; }
   @media (max-width: 1760px) {
     body header {
       background-size: 2000px;
@@ -62,23 +83,6 @@ body {
     min-height: 100vh; }
     body main label {
       letter-spacing: 1px; }
-    body main label,
-    body main select {
-      font-weight: 500;
-      font-family: "Roboto", sans-serif;
-      font-size: 18px;
-      display: block; }
-    body main form {
-      margin-top: 40px;
-      margin-bottom: 10px; }
-      body main form select {
-        margin: 20px auto 0;
-        height: 30px;
-        border: 1px solid black;
-        font-weight: 400;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2); }
-      body main form select:focus {
-        outline: none; }
     body main #images .images__container {
       width: 80vw;
       margin: 40px auto;
@@ -135,7 +139,7 @@ body {
           body main #images .images__container .image__wrapper .image {
             width: calc(100vw - 10px); } }
   body footer {
-    height: 80px;
+    height: 60px;
     background: #2c3e50;
     display: flex;
     flex-direction: column;
@@ -145,14 +149,14 @@ body {
       font-family: "roboto", sans-serif;
       color: white;
       margin: 0;
-      font-size: 16px; }
+      font-size: 12px; }
       body footer p a {
         color: white;
         text-decoration: underline; }
       body footer p a:hover {
         color: white; }
     body footer .credit {
-      margin-bottom: 5px; }
+      margin-bottom: 2px; }
 
 body {
   text-align: center; }
