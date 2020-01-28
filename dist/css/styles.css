@@ -84,22 +84,20 @@ body {
     body main label {
       letter-spacing: 1px; }
     body main #images .images__container {
-      width: 80vw;
+      width: calc(80vw + 12px);
       margin: 40px auto;
       -moz-columns: 4 !important;
-           columns: 4 !important;
-      -moz-column-gap: 4px;
-           column-gap: 4px; }
+           columns: 4 !important; }
       body main #images .images__container .image__wrapper {
         width: 100%;
         padding-bottom: 4px;
         -moz-column-break-inside: avoid;
              break-inside: avoid; }
         body main #images .images__container .image__wrapper .image {
-          width: calc(80vw / 4 - 3px); }
+          width: calc(80vw / 4 + 2px); }
     @media (max-width: 1200px) {
       body main #images .images__container {
-        width: 80vw;
+        width: calc(80vw + 8px);
         margin: 20px auto;
         -moz-columns: 3 !important;
              columns: 3 !important;
@@ -111,22 +109,20 @@ body {
           -moz-column-break-inside: avoid;
                break-inside: avoid; }
           body main #images .images__container .image__wrapper .image {
-            width: calc(80vw / 3 - 3px); } }
+            width: calc(80vw / 3); } }
     @media (max-width: 850px) {
       body main #images .images__container {
-        width: 90vw;
+        width: calc(90vw + 4px);
         margin: 20px auto;
         -moz-columns: 2 !important;
-             columns: 2 !important;
-        -moz-column-gap: 4px;
-             column-gap: 4px; }
+             columns: 2 !important; }
         body main #images .images__container .image__wrapper {
           width: 100%;
           padding-bottom: 4px;
           -moz-column-break-inside: avoid;
                break-inside: avoid; }
           body main #images .images__container .image__wrapper .image {
-            width: calc(90vw / 2 - 3px); } }
+            width: calc(90vw / 2); } }
     @media (max-width: 500px) {
       body main #images .images__container {
         width: 100vw;
@@ -137,7 +133,7 @@ body {
           width: 100%;
           padding: 4px; }
           body main #images .images__container .image__wrapper .image {
-            width: calc(100vw - 10px); } }
+            width: calc(100vw); } }
   body footer {
     height: 60px;
     background: #2c3e50;
