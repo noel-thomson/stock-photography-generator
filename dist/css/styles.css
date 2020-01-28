@@ -146,7 +146,6 @@ body {
     align-items: center;
     justify-content: center; }
     body footer p {
-      font-family: "roboto", sans-serif;
       color: white;
       margin: 0;
       font-size: 12px; }
@@ -156,7 +155,7 @@ body {
       body footer p a:hover {
         color: white; }
     body footer .credit {
-      margin-bottom: 2px; }
+      margin-bottom: 1px; }
 
 body {
   text-align: center; }
